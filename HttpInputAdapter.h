@@ -17,5 +17,5 @@ public:
 	virtual void Init(IAdapterConfig const& config) override;
 	virtual void Start() override;
 	//Inherited from IInputAdapter
-	virtual void Receive() override;
+	virtual void ProcessMessage(String const& msg) override;
 };

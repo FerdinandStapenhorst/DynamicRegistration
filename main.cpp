@@ -22,16 +22,20 @@ int main()
 		bl.StartAdapters();
 		//Do something with a specific adapter
 		auto httpAdpt = bl.AdapterInstance<HttpInputAdapter>();
-		httpAdpt->Receive();
+		httpAdpt->ProcessMessage("A new message");
+
+		//Throw example exception when attempting to process an empty message
+		httpAdpt->ProcessMessage("");
 
 		//do what the business logig does
-
-
+		//
+		//...
+		// 
 		//end
 		return 0;
 	}
 	catch (ConfigurationLoadException const& e) {
-		std::cerr << "A Configuration Load Exception  happened: " << e.SourceFile() << e.what() << std::endl;
+		std::cerr << "A Configuration Load Exception  happened: " << e.SourceFile() << " " << e.what() << std::endl;
 	}
 	catch (FileNotFoundException const& e) {
 		std::cerr << "File not found: " << e.FilePath() << " " << e.what() << std::endl;
@@ -43,8 +47,11 @@ int main()
 			std::cerr << "An std:exception happened: " << e.what() << std::endl;
 		}
 	}
+	catch (InvalidMessageException const& e) {
+		std::cerr << "Invalid Message Exception  happened: " << e.SourceFile() << " " << e.what() << std::endl;
+	}
 	catch (BaseException const& e) {
-		std::cerr << "An exception happened: " << e.SourceFile() << e.what() << std::endl;
+		std::cerr << "An exception happened: " << e.SourceFile() << " " << e.what() << std::endl;
 	}
 	catch (std::exception const& e) {
 		std::cerr << "An std:exception happened: " << e.what() << std::endl;

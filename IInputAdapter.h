@@ -6,5 +6,5 @@ class IInputAdapter : public IAdapter
 {
 public:
 
-	virtual void Receive() = 0;
+	virtual void ProcessMessage(String const& msg) = 0;
 };

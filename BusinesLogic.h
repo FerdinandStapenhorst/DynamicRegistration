@@ -23,8 +23,7 @@ public:
 				return adapter;
 			}
 			else {
-				BaseException ex(__FILE__, "Casting Adapter failed.");
-				throw(&ex);
+				throw BaseException(__FILE__, "Casting Adapter failed.");
 			}
 		}
 	}

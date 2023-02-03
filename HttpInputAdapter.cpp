@@ -15,16 +15,18 @@ void HttpInputAdapter::Start()
 	std::cout << "HttpInputAdapter::Start" << std::endl;
 }
 
-void HttpInputAdapter::Receive()
+void HttpInputAdapter::ProcessMessage(String const& msg)
 {
-	//Receive data
-	std::cout << "HttpInputAdapter::Receive" << std::endl;
+	//ProcessMessage data
+	std::cout << "HttpInputAdapter::ProcessMessage" << std::endl;
+	if (msg.length() == 0)
+		throw InvalidMessageException(__FILE__, "The message was empty!", MessageTypes::MsgTyp1);
+
 	try
 	{
 		//Do receiving of data
 	}
 	catch (std::exception const& e) {
-		InvalidMessageException ex(__FILE__, "Received invalid message.", MessageTypes::MsgTyp1);
-		throw(&ex);
+		throw InvalidMessageException(__FILE__, "Received invalid message.", MessageTypes::MsgTyp1);
 	}
 }
